@@ -42,7 +42,7 @@ postgresql:
     persistence:
       enabled: true
       existingClaim: immich-postgres-pvc
-      storageClass: manual
+      storageClass: longhorn
     initdb:
       scripts:
         create-extensions.sql: |
