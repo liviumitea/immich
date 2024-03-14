@@ -28,6 +28,9 @@ immich:
 
 postgresql:
   enabled: true
+  persistence:
+    enabled: true
+    existingClaim: immich-postgres-pvc
   image:
     repository: tensorchord/pgvecto-rs
     tag: pg14-v0.2.0
