@@ -14,7 +14,7 @@ env:
   IMMICH_MACHINE_LEARNING_URL: '{{ printf "http://%s-machine-learning:3003" .Release.Name }}'
 
 image:
-  tag: v1.95.1
+  tag: v1.98.2
 
 immich:
   persistence:
@@ -66,17 +66,22 @@ server:
     repository: ghcr.io/immich-app/immich-server
     pullPolicy: IfNotPresent
   
-  ingress:
-    main:
-      enabled: false
-      annotations:
-        # proxy-body-size is set to 0 to remove the body limit on file uploads
-        nginx.ingress.kubernetes.io/proxy-body-size: "0"
-      hosts:
-        - host: immich.local
-          paths:
-            - path: "/"
-      tls: []
+  service:
+    type: LoadBalancer
+    port: 80
+    targetPort: 3001
+    loadBalancerIP: 172.16.23.30
+  # ingress:
+  #   main:
+  #     enabled: false
+  #     annotations:
+  #       # proxy-body-size is set to 0 to remove the body limit on file uploads
+  #       nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  #     hosts:
+  #       - host: immich.local
+  #         paths:
+  #           - path: "/"
+  #     tls: []
 
 microservices:
   enabled: true
