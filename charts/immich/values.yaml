@@ -42,12 +42,15 @@ postgresql:
     persistence:
       enabled: true
       existingClaim: immich-postgres-pvc
+      storageClass: manual
     initdb:
       scripts:
         create-extensions.sql: |
           CREATE EXTENSION cube;
           CREATE EXTENSION earthdistance;
           CREATE EXTENSION vectors;
+  volumePermissions:
+    enabled: true
 
 redis:
   enabled: true
